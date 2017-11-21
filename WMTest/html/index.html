@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Modern Business - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/modern-business.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One - Set the background image for this slide in the line below -->
+                <div class="carousel-item active" style="background-image: url('img/msvs1.png');  background-size: 100%;">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <!-- Slide Two - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('img/msvs2.png');  background-size: 100%">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <!-- Slide Three - Set the background image for this slide in the line below -->
+                <div class="carousel-item" style="background-image: url('img/msvs3.png');  background-size: 100%">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </header>
+    <!-- Page Content -->
+    <div class="container">
+        <h1 class="my-4">Welcome WM Test WebApi</h1>
+        <!-- Marketing Icons Section -->
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Task 1:</h4>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input name="taskOneValue" type="text" class="form-control taskOneValueInput" placeholder="value" aria-label="value">
+                        </div>
+                        <br />
+                        <button class="btn btn-primary getOrAdd">GetOrAdd</button>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Result: </strong>
+                        <span class="taskOneResult"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Task 2:</h4>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input name="taskTwoID" type="text" class="form-control taskTwoIDInput" placeholder="ID" aria-label="ID">
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            <input name="taskTwoValue" type="text" class="form-control taskTwoValueInput" placeholder="value" aria-label="value">
+                        </div>
+                        <br />
+                        <button class="btn btn-primary addOrUpdate">AddOrUpdate</button>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Result: </strong>
+                        <span class="taskTwoResult"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 mb-4">
+                <div class="card h-100">
+                    <h4 class="card-header">Task 3:</h4>
+                    <div class="card-body">
+                        <div class="input-group">
+                            <input name="taskThreeID1" type="text" class="form-control taskThreeID1Input" placeholder="id1" aria-label="id1">
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            <input name="taskThreeID2" type="text" class="form-control taskThreeID2Input" placeholder="id2" aria-label="id2">
+                        </div>
+                        <br />
+                        <div class="input-group">
+                            <input name="taskThreeValue" type="text" class="form-control taskThreeValueInput" placeholder="value" aria-label="value">
+                        </div>
+                        <br />
+                        <button class="btn btn-primary transfer">Transfer</button>
+                    </div>
+                    <div class="card-footer">
+                        <strong>Result: </strong>
+                        <span class="taskThreeResult"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.row -->
+        <!-- Features Section -->
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <h2>Задачи для C# + СУБД SQL Server или ORM</h2>
+                Решить задания 2-мя способами:
+                <ul>
+                    <li>C# + ORM (EF, NHibernate, и т.п.);</li>
+                    <li>C# + хранимые процедуры.</li>
+                </ul>
+
+                <h3>Демонстрацию решений представить в виде:</h3>
+                веб сервисна выбор
+                <ul>
+                    <li>WebServices</li>
+                    <li>WCF</li>
+                    <li><strong>WebApi</strong></li>
+                </ul>
+
+
+                <p>
+                    клиент к созданному сервису (в любом виде), предусмотреть создание условий, гонок при обращении к сервису;
+
+                    скрипт создания и инициализации базы данных.
+
+                    Будет плюсом, если при создании демонстрационного приложения будут продемонстрированы знания <strong>ООП, SOLID, шаблонов проектирования.</strong>
+                </p>
+
+                <h2>Задача 1</h2>
+
+                <p>
+                    Есть таблица (id int not null identity primary key, name varchar (50) unique).
+
+                    Нужно реализовать алгоритм GetOrAdd - получение существующей или добавление новой записи по имени, с возвратом идентификатора. Предусмотреть одновременное (возможно с разных компьютеров) обращение к GetOrAdd, т.е. не должно быть Unique Key Violation.
+                </p>
+
+                <h2>Задача 2</h2>
+
+                <p>
+                    Есть таблица (id int not null primary key, value int not null).
+
+                    Нужно реализовать алгоритм AddOrUpdate - обновить существующее значение или вставить новое. Предусмотреть одновременное (возможно с разных компьютеров) обращение к AddOrUpdate. Исключить deadlock, unique key violation при параллельном вызове. Использование TABLOCK нежелательно.
+                </p>
+                <h2>Задача 3</h2>
+                <p>
+                    Есть таблица (id int primary key, balance money).
+
+                    Нужно реализовать алгоритм перевода Transfer - первод средств с id1 на id2. Предусмотреть одновременное (возможно с разных компьютеров) обращение к Transfer. Исключить deadlock, unique key violation при параллельном вызове. Использование TABLOCK нежелательно.
+                </p>
+            </div>
+        </div>
+        <!-- /.row -->
+        <hr>
+        <!-- Call to Action Section -->
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
+            </div>
+            <div class="col-md-4">
+                <a class="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <footer class="py-5 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; Your Website 2017</p>
+        </div>
+        <!-- /.container -->
+    </footer>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/cwo.js"></script>
+</body>
+</html>
