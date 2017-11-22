@@ -54,7 +54,8 @@ $().ready(() => {
         const source = taskThreeID1Input.value;
         const destination = taskThreeID2Input.value;
         const value = taskThreeValueInput.value;
-        let request = { id1: source, id2: destination, amount: value };
+        let request = '?';
+        request += $.param({ id1: source, id2: destination, amount: value });
 
         get(REST_URL_THREE, request).then(result => {
             taskThreeResult.innerHTML = result;

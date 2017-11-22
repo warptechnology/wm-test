@@ -1,4 +1,7 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Schema;
+using Newtonsoft.Json.Schema.Generation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +12,7 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using WMTest.Filters;
 using WMTest.Models;
+using WMTest.Utils;
 
 namespace WMTest.Controllers
 {
@@ -29,10 +33,10 @@ namespace WMTest.Controllers
             RepoSecond = R2;
             RepoThird = R3;
         }
-        [HttpGet]
+        [Route("GetOrAdd"), HttpGet]
         public HttpResponseMessage GetOrAdd(string value)
         {
-            
+
             HttpResponseMessage Mes = new HttpResponseMessage();
             try
             {
@@ -59,23 +63,35 @@ namespace WMTest.Controllers
         [Route("AddOrUpdate"), HttpPost]
         public HttpResponseMessage AddOrUpdate([NakedBody] string request)
         {
-            SecondTaskModel value = JsonConvert.DeserializeObject<SecondTaskModel>(request);
             HttpResponseMessage Mes = new HttpResponseMessage();
+            Mes.StatusCode = HttpStatusCode.BadRequest;
+            if (null == request) return Mes;
+
+            //SecondTaskModel value = JsonConvert.DeserializeObject<SecondTaskModel>(request);
+            SecondTaskModel value = request.TryParseJson<SecondTaskModel>();
+            if (null == value) return Mes;
             try
             {
                 Mes.Content = new StringContent(RepoSecond.AddOrUpdate(value).ToString());
                 Mes.StatusCode = HttpStatusCode.OK;
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
-                Mes.StatusCode = HttpStatusCode.BadRequest;
+                Mes.StatusCode = HttpStatusCode.InternalServerError;
             }
             return Mes;
         }
 
+        [Route("TransferMoney"), HttpGet]
         public HttpResponseMessage TransferMoney(int id1, int id2, decimal amount)
         {
             HttpResponseMessage Mes = new HttpResponseMessage();
+
+            if (id1 <= 0 || id2 <= 0 || amount <= 0 || id1 == id2)
+            {
+                Mes.StatusCode = HttpStatusCode.BadRequest;
+                return Mes;
+            }
             try
             {
                 var obj = RepoThird.TrasferMoney(id1, id2, amount);
@@ -83,9 +99,12 @@ namespace WMTest.Controllers
             }
             catch
             {
-                Mes.StatusCode = HttpStatusCode.BadRequest;
+                Mes.StatusCode = HttpStatusCode.InternalServerError;
             }
             return Mes;
         }
+
+
     }
+    
 }
