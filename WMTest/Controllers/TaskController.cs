@@ -61,8 +61,8 @@ namespace WMTest.Controllers
             }
             return Mes;
         }
-        //[Route("AddOrUpdate"), HttpPost]
-        [HttpPost]
+        [Route("AddOrUpdate"), HttpPost]
+        //[HttpPost]
         public HttpResponseMessage AddOrUpdate([NakedBody] string request)
         {
             HttpResponseMessage Mes = new HttpResponseMessage();
@@ -71,7 +71,8 @@ namespace WMTest.Controllers
 
             //SecondTaskModel value = JsonConvert.DeserializeObject<SecondTaskModel>(request);
             SecondTaskModel value = request.TryParseJson<SecondTaskModel>();
-            if (null == value) return Mes;
+            if (null == value)
+                return Mes;
             try
             {
                 Mes.Content = new StringContent(RepoSecond.AddOrUpdate(value).ToString());
@@ -84,21 +85,22 @@ namespace WMTest.Controllers
             return Mes;
         }
 
-        //[Route("TransferMoney"), HttpGet]
-        [HttpGet]
+
+        [Route("TransferMoney"), HttpGet]
+        //[HttpGet]
         public HttpResponseMessage TransferMoney(int id1, int id2, decimal amount)
         {
             HttpResponseMessage Mes = new HttpResponseMessage();
+            Mes.StatusCode = HttpStatusCode.BadRequest;
 
             if (id1 <= 0 || id2 <= 0 || amount <= 0 || id1 == id2)
-            {
-                Mes.StatusCode = HttpStatusCode.BadRequest;
                 return Mes;
-            }
+
             try
             {
                 var obj = RepoThird.TrasferMoney(id1, id2, amount);
                 Mes.Content = new StringContent(obj.ToString(), Encoding.UTF8);
+                Mes.StatusCode = HttpStatusCode.OK;
             }
             catch
             {
@@ -107,7 +109,38 @@ namespace WMTest.Controllers
             return Mes;
         }
 
+        [Route("Table"), HttpGet]
+        public HttpResponseMessage Table(int value)
+        {
+            HttpResponseMessage Mes = new HttpResponseMessage();
+            Mes.StatusCode = HttpStatusCode.BadRequest;
+            List<Tuple<string, string>> Table = new List<Tuple<string, string>>();
+
+            switch (value)
+            {
+                case 1:
+                    List<FirstTaskModel> ftm = RepoFirst.Get().OrderBy(m => m.ID).ToList();
+                    Table.AddRange(ftm.Select(m => new Tuple<string, string>(m.ID.ToString(), m.Name)));
+                    break;
+                case 2:
+                    List<SecondTaskModel> stm = RepoSecond.Get().OrderBy(m => m.ID).ToList();
+                    Table.AddRange(stm.Select(m => new Tuple<string, string>(m.ID.ToString(), m.Value.ToString())));
+                    break;
+                case 3:
+                    List<ThirdTaskModel> ttm = RepoThird.Get().OrderBy(m => m.ID).ToList();
+                    Table.AddRange(ttm.Select(m => new Tuple<string, string>(m.ID.ToString(), m.Balance.ToString())));
+                    break;
+                default:
+                    return Mes;
+            }
+            string resp = new JavaScriptSerializer().Serialize(Table);
+            Mes.Content = new StringContent(resp);
+            Mes.StatusCode = HttpStatusCode.OK;
+            return Mes;
+        }
+
+
 
     }
-    
+
 }

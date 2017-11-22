@@ -31,11 +31,18 @@ $().ready(() => {
     const taskThreeResult = document.querySelector('.taskThreeResult');
     const button3 = document.querySelector('.transfer');
 
+    let Table = [
+        document.querySelector('.TaskTable1'),
+        document.querySelector('.TaskTable2'),
+        document.querySelector('.TaskTable3')
+    ];
+
     button1.onclick = () => {
         const value = taskOneValueInput.value;
         get(REST_URL_ONE, value).then(result => {
             taskOneResult.innerHTML = result;
         });
+        get_Table(1);
     }
 
     button2.onclick = () => {
@@ -48,6 +55,8 @@ $().ready(() => {
 
         const dataType = 'json';
         post(REST_URL_TWO, JSON.stringify(request), callback, dataType);
+
+        get_Table(2);
     }
 
     button3.onclick = () => {
@@ -60,5 +69,25 @@ $().ready(() => {
         get(REST_URL_THREE, request).then(result => {
             taskThreeResult.innerHTML = result;
         });
+
+        get_Table(3);
     }
+
+    get_Table = (TaskNumber) => {
+        if (TaskNumber != 1 && TaskNumber != 2 && TaskNumber != 3)
+            return;
+        let result = get("Table", TaskNumber).then(result => {
+            let arr = JSON.parse(result);
+            if (Array.isArray(arr)) {
+                $(Table[TaskNumber - 1]).empty();
+                for (var i = 0; i < arr.length; i++) {
+                    $(Table[TaskNumber - 1]).append(`<tr><th scope="row">${arr[i].Item1}</th><td>${arr[i].Item2}</td></tr>`);
+                }
+            }
+        });
+    };
+    get_Table(1);
+    get_Table(2);
+    get_Table(3);
 });
+
