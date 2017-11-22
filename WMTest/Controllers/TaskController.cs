@@ -33,7 +33,8 @@ namespace WMTest.Controllers
             RepoSecond = R2;
             RepoThird = R3;
         }
-        [Route("GetOrAdd"), HttpGet]
+        //[Route("GetOrAdd"), HttpGet]
+        [HttpGet]
         public HttpResponseMessage GetOrAdd(string value)
         {
 
@@ -60,7 +61,8 @@ namespace WMTest.Controllers
             }
             return Mes;
         }
-        [Route("AddOrUpdate"), HttpPost]
+        //[Route("AddOrUpdate"), HttpPost]
+        [HttpPost]
         public HttpResponseMessage AddOrUpdate([NakedBody] string request)
         {
             HttpResponseMessage Mes = new HttpResponseMessage();
@@ -82,7 +84,8 @@ namespace WMTest.Controllers
             return Mes;
         }
 
-        [Route("TransferMoney"), HttpGet]
+        //[Route("TransferMoney"), HttpGet]
+        [HttpGet]
         public HttpResponseMessage TransferMoney(int id1, int id2, decimal amount)
         {
             HttpResponseMessage Mes = new HttpResponseMessage();
